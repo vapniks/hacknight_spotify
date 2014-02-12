@@ -1,6 +1,18 @@
 ;; Entry to West London hack night challenge on 11/02/2014
 ;;
+;; The challenge was to download a list of songs from spotify that
+;; match a given string, and then try to fill a given period of time
+;; with some of these songs as tightly as possible.
 
+;; First attempt was using Haskell, but we had problems getting the json data
+;; in a useable form, so we did a rush job with elisp at the last minute.
+;; Our algorithm is very simple:
+;; 1) Download the songs
+;; 2) Create many different random permutations of the songs
+;; 3) For each permutation take songs from the front of the list
+;;    while the time period they occupy is greater than the allowed time
+;; 4) Find the one which has the longest total time (and hence fits the
+;;    time period the tightest).
 
 (defun spotifydata (term)
   "Download list of songs related to the string TERM."
