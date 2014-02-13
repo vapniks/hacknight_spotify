@@ -1,4 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
+
+-- This JSON parsing code was written by Steve Purcell: https://gist.github.com/purcell/8974857
 module SpotifyPack
 where
 import qualified Network.URI as URI
@@ -35,7 +37,7 @@ parseResponse resp =
        flip T.parseMaybe result $ \obj ->
            parseJSON =<< (obj .: "tracks")
 
-
+-- Simple algorithm - just stuff the songs in until you can't fit any more
 packSongs :: (Maybe [Song]) -> Float -> ((Maybe [Song]), Float)
 packSongs _ 0 = (Nothing, 0)
 packSongs (Just []) _ = (Nothing, 0)
