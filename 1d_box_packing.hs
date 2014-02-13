@@ -46,10 +46,10 @@ packSongs (Just songs) space =
   (Just (fst x), (snd x))
   where x = last $ takeWhile ((< space) . snd) $ scanl (\acc s -> (s:(fst acc),(snd acc)+(duration s))) ([], 0) songs
 
-                                                 
 main = do
   (term:(length:_)) <- getArgs
   songs <- searchSpotify term
   print (snd (packSongs songs (read length::Float)))
 
-  
+-- A better solution is here: https://github.com/purcell/spotify-pack/blob/master/SpotifyPack.hs
+
